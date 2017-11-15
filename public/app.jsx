@@ -8,6 +8,13 @@ var Greeter = React.createClass({
     };
   },
 
+  // onSubmit action invoke onButtonClick, e = eventhandler
+  onButtonClick: function (e) {
+    e.preventDefault(); // since it is form, will prevent form from submitting on page refresh
+    var name = this.refs.name.value;
+    alert(name);
+  },
+
   render: function () {
     var name = this.props.name; //props
     var message = this.props.message;
@@ -16,6 +23,12 @@ var Greeter = React.createClass({
       <div>
         <h1>Hello {name}</h1>
         <p>{message +'!!'}</p>
+
+        <form onSubmit={this.onButtonClick}>
+          <input type="text" ref="name"/>
+          <button>Set Name</button>
+        </form>
+
       </div>
     );
   }
