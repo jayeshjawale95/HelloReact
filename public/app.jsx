@@ -8,15 +8,30 @@ var Greeter = React.createClass({
     };
   },
 
+  // method available in react, give initial state of the property
+  getInitialState: function () {
+    return {
+      name: this.props.name
+    };
+  },
+
   // onSubmit action invoke onButtonClick, e = eventhandler
   onButtonClick: function (e) {
     e.preventDefault(); // since it is form, will prevent form from submitting on page refresh
-    var name = this.refs.name.value;
-    alert(name);
+
+    var nameRef = this.refs.name;
+    var name = nameRef.value;
+    nameRef.value = "";
+
+    if (typeof name == 'string' && name.length > 0) {
+      this.setState({
+        name: name
+      });
+    }
   },
 
   render: function () {
-    var name = this.props.name; //props
+    var name = this.state.name; //props
     var message = this.props.message;
 
     return (
